@@ -1,0 +1,42 @@
+---
+title: "Analysis"
+format:
+  html:
+    toc: true
+    code-fold: true
+execute:
+  echo: true
+  warning: false
+---
+
+# Analysis
+
+This is a starter Quarto analysis document for the course.
+
+```{r}
+library(tidyverse)
+
+# Example data summary
+mtcars |>
+  group_by(cyl) |>
+  summarize(
+    avg_mpg = mean(mpg, na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  )
+```
+
+## Visualization
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Fuel economy vs. weight",
+    x = "Weight",
+    y = "MPG",
+    color = "Cylinders"
+  ) +
+  theme_minimal()
+```
